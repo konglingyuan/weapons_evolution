@@ -1,16 +1,22 @@
 var Player = require("./player");
+var Weapon = require("./weapon.js");
+var Armor = require("./armor.js");
 
 function Result() {
 
 }
 
-Result.getScore = function(playerOne, playerTwo) {
-  var zhangsan = playerOne.name;
-  var lisi = playerTwo.name;
+Result.getScore = function(playerOne, playerTwo,weapon,armor) {
+  var zhangsan = playerOne.profession + playerOne.name;
+  var lisi = playerTwo.profession + playerTwo.name;
+
   var resultText = "";
   while(true) {
-    playerOne.hp = playerOne.hp - playerTwo.attack;
-    playerTwo.hp = playerTwo.hp - playerOne.attack;
+    var attackHarm = playerOne.attack + weapon.attack;
+    var armorHarm = playerTwo.attack - armor.defense;
+
+    playerOne.hp = playerOne.hp - armorHarm;
+    playerTwo.hp = playerTwo.hp - attackHarm;
 
     if(playerOne.hp <= 0) {
       resultText += zhangsan + '被打败了！';
@@ -18,10 +24,10 @@ Result.getScore = function(playerOne, playerTwo) {
       break;
     }
 
-    resultText += zhangsan + "攻击了" + lisi + ',' +
-    lisi + "受到了" + playerOne.attack + "点伤害," + lisi + "生命值还剩" + playerTwo.hp + "\n";
-    console.log(zhangsan + "攻击了" + lisi + ',' +
-    lisi + "受到了" + playerOne.attack + "点伤害," + lisi + "生命值还剩" + playerTwo.hp);
+    resultText += zhangsan + '用' + weapon.name + "攻击了" + lisi + ',' +
+    lisi + "受到了" + attackHarm + "点伤害," + lisi + "生命值还剩" + playerTwo.hp + "\n";
+    console.log(zhangsan + '用' + weapon.name + "攻击了" + lisi + ',' +
+    lisi + "受到了" + attackHarm + "点伤害," + lisi + "生命值还剩" + playerTwo.hp);
 
     if(playerTwo.hp <= 0) {
       resultText += lisi + '被打败了！';
@@ -30,9 +36,9 @@ Result.getScore = function(playerOne, playerTwo) {
     }
 
     resultText += lisi + "攻击了" + zhangsan + ',' +
-    zhangsan + "受到了" + playerTwo.attack + "点伤害," + zhangsan + "生命值还剩" + playerOne.hp + "\n";
+    zhangsan + "受到了" + armorHarm + "点伤害," + zhangsan + "生命值还剩" + playerOne.hp + "\n";
     console.log(lisi + "攻击了" + zhangsan + ',' +
-    zhangsan + "受到了" + playerTwo.attack + "点伤害," + zhangsan + "生命值还剩" + playerOne.hp);
+    zhangsan + "受到了" + armorHarm + "点伤害," + zhangsan + "生命值还剩" + playerOne.hp);
 
   }
 
