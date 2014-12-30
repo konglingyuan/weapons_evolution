@@ -1,4 +1,4 @@
-function Player(name, hp, attack,profession) {
+function Player(name, hp, attack, profession) {
   this.name = name;
   this.hp = hp;
   this.attack = attack;

@@ -1,4 +1,4 @@
-function Armor (name,defense) {
+function Armor (name, defense) {
   this.name = name;
   this.defense = defense;
 };

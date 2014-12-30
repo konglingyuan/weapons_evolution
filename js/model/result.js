@@ -6,7 +6,7 @@ function Result() {
 
 }
 
-Result.getScore = function(playerOne, playerTwo,weapon,armor) {
+Result.getResult = function(playerOne, playerTwo, weapon, armor) {
   var zhangsan = playerOne.profession + playerOne.name;
   var lisi = playerTwo.profession + playerTwo.name;
 
