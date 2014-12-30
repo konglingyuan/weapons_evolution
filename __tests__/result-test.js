@@ -12,7 +12,7 @@ describe("Result", function() {
       var armor = {name : '荆棘之甲', defense : 3};
 
 
-      var result = Result.getScore(playerOne, playerTwo, weapon, armor);
+      var result = Result.getResult(playerOne, playerTwo, weapon, armor);
 
       expect(result).toBe(
       "战士张三用无尽之刃攻击了普通人李四,普通人李四受到了25点伤害,普通人李四生命值还剩75\n" +
