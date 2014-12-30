@@ -11,5 +11,5 @@ function game() {
   var weapon = new Weapon("无尽之刃", 5);
   var armor = new Armor("荆棘之甲", 3);
 
-  Result.getScore(playerOne, playerTwo, weapon, armor);
+  Result.getResult(playerOne, playerTwo, weapon, armor);
 }
