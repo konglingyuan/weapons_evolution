@@ -1,7 +1,7 @@
-var Result = require("./result.js");
-var Player = require("./player.js");
-var Weapon = require("./weapon.js");
-var Armor = require("./armor.js");
+var Result = require("./model/result.js");
+var Player = require("./model/player.js");
+var Weapon = require("./model/weapon.js");
+var Armor = require("./model/armor.js");
 
 game();
 function game() {

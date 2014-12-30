@@ -1,4 +1,4 @@
-jest.dontMock("../js/result.js");
+jest.dontMock("../js/model/result.js");
 
 describe("Result", function() {
   describe("#getResult", function() {
