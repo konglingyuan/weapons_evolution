@@ -1,9 +1,3 @@
-// 战士张三用火焰剑攻击了普通人李四,李四受到了8点伤害,李四着火了,李四剩余生命：12
-// 李四受到2点火焰伤害, 李四剩余生命：10
-// //李四进攻
-// //张三进攻
-// 李四受到2点火焰伤害, 李四剩余生命：x
-// //李四进攻
 jest.dontMock("../js/model/soldier.js");
 jest.dontMock("../js/model/civilian.js");
 jest.dontMock("../js/model/weapon.js");
