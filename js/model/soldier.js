@@ -126,4 +126,31 @@ Soldier.prototype.dizzyStrikes = function(player) {
   return resultText;
 };
 
+Soldier.prototype.iceStrikes = function(player) {
+  var one = Math.random();
+  var odd = this.weapon.feature.odds;
+
+  var resultText = "";
+
+  var count = this.weapon.feature.count - 1;
+
+  player.hp = player.hp - this.attack;
+
+  var soldier = "战士" + this.name;
+
+  if (one < odd) {
+    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "冻僵了，生命值还剩：" + player.hp + "\n";
+
+  } else {
+    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp;
+
+  }
+  console.log(resultText);
+
+  return resultText;
+};
+
+
 module.exports = Soldier;
