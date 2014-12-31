@@ -9,7 +9,7 @@ function Civilian(name, hp, attack) {
 Civilian.prototype = Object.create(Player.prototype);
 Civilian.prototype.constructor = Civilian;
 
-Civilian.prototype.Civilianbeat = function(soldier,armor) {
+Civilian.prototype.civilianBeat = function(soldier,armor) {
 
   var armorHarm = this.attack - armor.defense;
   soldier.hp = soldier.hp - armorHarm;
@@ -17,7 +17,9 @@ Civilian.prototype.Civilianbeat = function(soldier,armor) {
   var resultText = "";
 
   resultText += "普通人" + this.name + "攻击了战士" + soldier.name + ',战士' +
-  soldier.name + "受到了" + armorHarm + "点伤害,战士" + soldier.name + "生命值还剩" + soldier.hp
+  soldier.name + "受到了" + armorHarm + "点伤害,战士" + soldier.name + "生命值还剩" + soldier.hp;
+
+  console.log(resultText);
 
   return resultText;
 };
