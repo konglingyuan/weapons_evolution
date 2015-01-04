@@ -29,7 +29,7 @@ describe("Soldier", function() {
 
             var str = "战士张三用无敌大晕锤攻击了普通人李四，李四受到了20点伤害，李四晕倒了，生命值还剩：80" + "\n" +
                 "李四晕倒了，无法攻击，眩晕还剩：" + count + "轮" + "\n" +
-                "战士张三用无敌大晕锤攻击了普通人李四，李四受到了20点伤害，李四晕倒了，生命值还剩：60";
+                "战士张三用无敌大晕锤攻击了普通人李四，李四受到了20点伤害，李四生命值还剩：60";
             expect(result).toBe(str);
         });
         it("should return the correct statement", function() {

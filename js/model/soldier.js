@@ -7,6 +7,7 @@ function Soldier(name, hp, attack, weapon, armor) {
   Player.call(this, name, hp, attack);
   this.weapon = weapon;
   this.armor = armor;
+  this.count = 0;
 }
 
 Soldier.prototype = Object.create(Player.prototype);
@@ -32,6 +33,13 @@ Soldier.prototype.criticalStrikes = function(player) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + ',' +
         player.name + "受到了" + this.attack + "点伤害," + player.name + "生命值还剩：" + player.hp;
   }
+
+  var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+
+  var civilian = new Civilian(player.name, player.hp, player.attack);
+
+  resultText += civilian.civilianBeat(soldier1, this.armor);
+
   console.log(resultText);
   return resultText;
 };
@@ -42,24 +50,47 @@ Soldier.prototype.fireStrikes = function(player) {
 
   var resultText = "";
 
-  var fireHarm = this.weapon.attack;
+  var soldier = "战士" + this.name;
 
   player.hp = player.hp - this.attack;
 
-  var soldier = "战士" + this.name;
+  if(one < odd) {
 
-  if (one < odd) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-    player.name + "受到了" + this.attack + "点伤害，" + player.name + "着火了，生命值还剩：" + player.hp + "\n";
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "着火了，生命值还剩：" + player.hp  + "\n";
 
-    player.hp = player.hp - fireHarm;
-
-    resultText += player.name + "受到了" + fireHarm + "点火焰伤害，" + player.name + "生命值还剩：" + player.hp;
+    this.count =  this.count <= 0 ? 1 : this.count + 1;
   } else {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp;
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp  + "\n";
+    this.count--
+  }
+
+  var fireHarm = this.weapon.attack;
+
+  if(player.hp > 0) {
+    if(this.count < 2 && this.count >= 0) {
+      player.hp = player.hp - fireHarm;
+      resultText += player.name + "受到了" + fireHarm + "点火焰伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
+    }
+    if(this.count >= 2) {
+      fireHarm += this.weapon.attack;
+
+      player.hp = player.hp - fireHarm;
+      resultText += player.name + "受到了" + fireHarm + "点火焰伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
+      this.count--;
+    }
+  }
+
+  if(player.hp > 0) {
+    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+
+    var civilian = new Civilian(player.name, player.hp, player.attack);
+
+    resultText += civilian.civilianBeat(soldier1, this.armor);
 
   }
+
   console.log(resultText);
 
   return resultText;
@@ -70,23 +101,47 @@ Soldier.prototype.venomStrikes = function(player) {
   var odd = this.weapon.feature.odds;
   var resultText = "";
 
-  var fireHarm = this.weapon.attack;
-
   player.hp = player.hp - this.attack;
 
   var soldier = "战士" + this.name;
 
-  if (one < odd) {
-    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-    player.name + "受到了" + this.attack + "点伤害，" + player.name + "中毒了，生命值还剩：" + player.hp + "\n";
+  if(one < odd) {
 
-    player.hp = player.hp - fireHarm;
-    resultText += player.name + "受到了" + fireHarm + "点毒液伤害，" + player.name + "生命值还剩：" + player.hp;
+    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "中毒了，生命值还剩：" + player.hp  + "\n";
+
+    this.count =  this.count <= 0 ? 1 : this.count + 1;
   } else {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp;
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp  + "\n";
+    this.count--;
+  }
+
+  var fireHarm = this.weapon.attack;
+
+  if(player.hp > 0) {
+    if(this.count < 2 && this.count >= 0) {
+      player.hp = player.hp - fireHarm;
+      resultText += player.name + "受到了" + fireHarm + "点毒液伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
+    }
+    if(this.count >= 2) {
+      fireHarm += this.weapon.attack;
+
+      player.hp = player.hp - fireHarm;
+      resultText += player.name + "受到了" + fireHarm + "点毒液伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
+      this.count--;
+    }
+  }
+
+  if(player.hp > 0) {
+    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+
+    var civilian = new Civilian(player.name, player.hp, player.attack);
+
+    resultText += civilian.civilianBeat(soldier1, this.armor);
 
   }
+
   console.log(resultText);
 
   return resultText;
@@ -98,29 +153,32 @@ Soldier.prototype.dizzyStrikes = function(player) {
 
   var resultText = "";
 
-  var count = this.weapon.feature.count - 1;
-
   player.hp = player.hp - this.attack;
 
   var soldier = "战士" + this.name;
 
-  if (one < odd) {
+  if(one < odd) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "晕倒了，生命值还剩：" + player.hp + "\n";
 
-    resultText += player.name + "晕倒了，无法攻击，眩晕还剩：" + count + "轮" + "\n";
-    player.hp = player.hp - this.attack;
+    this.count =  this.count <= 0 ? 1 : this.count + 1;
+  } else {
+    resultText +=soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
+    this.count--;
+  }
 
-    if(player.hp > 0) {
-      resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-      player.name + "受到了" + this.attack + "点伤害，" + player.name + "晕倒了，生命值还剩：" + player.hp ;
-    }
+  if(this.count >= 0) {
+    resultText += player.name + "晕倒了，无法攻击，眩晕还剩：" + this.count + "轮";
 
   } else {
-    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp;
+    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
 
+    var civilian = new Civilian(player.name, player.hp, player.attack);
+
+    resultText += civilian.civilianBeat(soldier1, this.armor);
   }
+
   console.log(resultText);
 
   return resultText;
@@ -132,21 +190,32 @@ Soldier.prototype.iceStrikes = function(player) {
 
   var resultText = "";
 
-  var count = this.weapon.feature.count - 1;
-
   player.hp = player.hp - this.attack;
 
   var soldier = "战士" + this.name;
 
-  if (one < odd) {
+  if(one < odd) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "冻僵了，生命值还剩：" + player.hp + "\n";
 
+    this.count =  this.count <= 0 ? 1 : this.count + 1;
   } else {
-    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
-    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp;
-
+    resultText +=soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
+    player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
+    this.count--;
   }
+
+  if(this.count === 3) {
+    resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
+
+  } else {
+    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+
+    var civilian = new Civilian(player.name, player.hp, player.attack);
+
+    resultText += civilian.civilianBeat(soldier1, this.armor);
+  }
+
   console.log(resultText);
 
   return resultText;
