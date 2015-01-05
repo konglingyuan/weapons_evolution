@@ -88,7 +88,6 @@ Soldier.prototype.fireStrikes = function(player) {
     var civilian = new Civilian(player.name, player.hp, player.attack);
 
     resultText += civilian.civilianBeat(soldier1, this.armor);
-
   }
 
   console.log(resultText);
@@ -139,7 +138,6 @@ Soldier.prototype.venomStrikes = function(player) {
     var civilian = new Civilian(player.name, player.hp, player.attack);
 
     resultText += civilian.civilianBeat(soldier1, this.armor);
-
   }
 
   console.log(resultText);
@@ -220,6 +218,5 @@ Soldier.prototype.iceStrikes = function(player) {
 
   return resultText;
 };
-
 
 module.exports = Soldier;
