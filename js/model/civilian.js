@@ -10,7 +10,6 @@ Civilian.prototype = Object.create(Player.prototype);
 Civilian.prototype.constructor = Civilian;
 
 Civilian.prototype.civilianBeat = function(soldier,armor) {
-
   var armorHarm = this.attack - armor.defense;
 
   soldier.hp = soldier.hp - armorHarm;
