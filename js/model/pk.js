@@ -2,13 +2,10 @@ var Soldier = require("./soldier.js");
 var Civilian = require("./civilian.js");
 
 function Pk() {
-
 }
 
 Pk.startPk = function (soldier,civilian) {
-
     var resultText = "";
-
     var features = soldier.weapon.feature;
 
     while(true){
@@ -22,14 +19,11 @@ Pk.startPk = function (soldier,civilian) {
             resultText += civilian.name + "被打败了！！！";
             break;
         }
-
-        //civilian.civilianBeat(soldier, soldier.armor);
     }
     console.log(resultText);
 };
 
 Pk.getAttackMethod = function (feature, soldier, civilian) {
-
     if(feature.name === '致命一击') {
         return soldier.criticalStrikes(civilian);
     }
