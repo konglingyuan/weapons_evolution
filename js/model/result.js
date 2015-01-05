@@ -3,7 +3,6 @@ var Weapon = require("./weapon.js");
 var Armor = require("./armor.js");
 
 function Result() {
-
 }
 
 Result.getResult = function(playerOne, playerTwo, weapon, armor) {
