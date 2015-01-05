@@ -2,6 +2,7 @@ var Civilian = require("./civilian");
 var Weapon = require("./weapon");
 var Player = require("./player");
 var WeaponFeature = require("./weapon-feature");
+var Armor = require("./armor");
 
 function Soldier(name, hp, attack, weapon, armor) {
   Player.call(this, name, hp, attack);
@@ -26,19 +27,22 @@ Soldier.prototype.criticalStrikes = function(player) {
     player.hp = player.hp - attackHarm;
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + ',' +
         soldier + "发动了" + this.weapon.feature.name + "," +
-        player.name + "受到了" + attackHarm + "点伤害," + player.name + "生命值还剩：" + player.hp;
+        player.name + "受到了" + attackHarm + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
 
   } else {
     player.hp = player.hp - this.attack;
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + ',' +
-        player.name + "受到了" + this.attack + "点伤害," + player.name + "生命值还剩：" + player.hp;
+        player.name + "受到了" + this.attack + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
   }
 
-  var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+  if(player.hp > 0) {
+    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
 
-  var civilian = new Civilian(player.name, player.hp, player.attack);
 
-  resultText += civilian.civilianBeat(soldier1, this.armor);
+    var civilian = new Civilian(player.name, player.hp, player.attack);
+
+    resultText += civilian.civilianBeat(soldier1, this.armor);
+  }
 
   console.log(resultText);
   return resultText;
