@@ -13,7 +13,6 @@ describe("Soldier", function() {
     var WeaponFeature = require("../js/model/weapon-feature");
 
     it("should return the correct statement", function() {
-
       var feature = new WeaponFeature("致命一击", 1, 1);
 
       var weapon = new Weapon("暴剑", 3, feature);
@@ -27,6 +26,7 @@ describe("Soldier", function() {
       var str = "战士张三用暴剑攻击了普通人李四,战士张三发动了致命一击,李四受到了69点伤害,李四生命值还剩：31";
       expect(result).toBe(str);
     });
+    
     it("should return the correct statement", function() {
       var feature = new WeaponFeature("致命一击", 1, 0);
 
