@@ -4,7 +4,6 @@ jest.dontMock("../js/model/weapon.js");
 jest.dontMock("../js/model/player");
 jest.dontMock("../js/model/weapon-feature");
 
-
 describe("Soldier", function() {
     describe(".dizzyStrikes", function() {
         var Player = require("../js/model/player");
@@ -14,7 +13,6 @@ describe("Soldier", function() {
         var WeaponFeature = require("../js/model/weapon-feature");
 
         it("should return the correct statement", function() {
-
             var feature = new WeaponFeature("晕", 2, 1);
 
             var count = feature.count - 1;
@@ -32,6 +30,7 @@ describe("Soldier", function() {
                 "战士张三用无敌大晕锤攻击了普通人李四，李四受到了20点伤害，李四生命值还剩：60";
             expect(result).toBe(str);
         });
+        
         it("should return the correct statement", function() {
             var feature = new WeaponFeature("晕", 2, 0);
 
