@@ -63,7 +63,7 @@ Soldier.prototype.fireStrikes = function(player) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "着火了，生命值还剩：" + player.hp  + "\n";
 
-    this.count =  this.count <= 0 ? 1 : this.count + 1;
+    this.count =  this.count <= 0 ? this.weapon.feature.count - 1 : this.count + 1;
   } else {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp  + "\n";
@@ -113,7 +113,7 @@ Soldier.prototype.venomStrikes = function(player) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "中毒了，生命值还剩：" + player.hp  + "\n";
 
-    this.count =  this.count <= 0 ? 1 : this.count + 1;
+    this.count =  this.count <= 0 ? this.weapon.feature.count - 1 : this.count + 1;
   } else {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp  + "\n";
@@ -163,7 +163,7 @@ Soldier.prototype.dizzyStrikes = function(player) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "晕倒了，生命值还剩：" + player.hp + "\n";
 
-    this.count =  this.count <= 0 ? 1 : this.count + 1;
+    this.count =  this.count <= 0 ? this.weapon.feature.count - 1 : this.count + 1;
   } else {
     resultText +=soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
@@ -200,16 +200,14 @@ Soldier.prototype.iceStrikes = function(player) {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "冻僵了，生命值还剩：" + player.hp + "\n";
 
-    this.count =  this.count <= 0 ? 1 : this.count + 1;
+    this.count =  this.count <= 0 ? this.weapon.feature.count - 1 : this.count + 1;
   } else {
-    resultText +=soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
+    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
-    this.count--;
   }
 
   if(this.count === 3) {
     resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
-
   } else {
     var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
 
