@@ -54,7 +54,6 @@ Soldier.prototype.fireStrikes = function(player) {
   player.hp = player.hp - this.attack;
 
   if(one < odd) {
-    console.log(this.count);
     resultText += soldier + '用' + this.weapon.name + "攻击了" + player.profession + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "着火了，生命值还剩：" + player.hp  + "\n";
 
@@ -124,7 +123,6 @@ Soldier.prototype.dizzyStrikes = function(player) {
   if(player.hp > 0) {
     resultText += State.dizzyState(player, this.count);
   }
-
   console.log(resultText);
   return resultText;
 };
@@ -152,9 +150,10 @@ Soldier.prototype.iceStrikes = function(player) {
   if(this.count === 3) {
     resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
   } else {
-    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+    var soldier1 = new Soldier(this.name, this.hp, this.attack,
+      this.profession, this.state, this.weapon,this.armor);
 
-    var civilian = new Civilian(player.name, player.hp, player.attack);
+    var civilian = new Civilian(player.name, player.hp, player.attack, player.profession, player.state);
 
     resultText += civilian.civilianBeat(soldier1, this.armor);
   }
