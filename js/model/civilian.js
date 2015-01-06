@@ -2,8 +2,8 @@ var Player = require("./player");
 var Soldier = require("./soldier");
 var Armor = require("./armor.js");
 
-function Civilian(name, hp, attack, profession) {
-  Player.call(this, name, hp, attack, profession);
+function Civilian(name, hp, attack, profession, state) {
+  Player.call(this, name, hp, attack, profession, state);
 }
 
 Civilian.prototype = Object.create(Player.prototype);
@@ -13,12 +13,13 @@ Civilian.prototype.civilianBeat = function(soldier,armor) {
   var armorHarm = this.attack - armor.defense;
 
   soldier.hp = soldier.hp - armorHarm;
-
   var resultText = "";
 
-  resultText += "普通人" + this.name + "攻击了战士" + soldier.name + ',战士' +
-  soldier.name + "受到了" + armorHarm + "点伤害,战士" + soldier.name + "生命值还剩" + soldier.hp;
+  resultText += this.profession + this.name + "攻击了" + soldier.profession + soldier.name +
+    ',' + soldier.profession + soldier.name + "受到了" + armorHarm +
+    "点伤害," + soldier.profession + soldier.name + "生命值还剩" + soldier.hp;
 
+  console.log(resultText);
   return resultText;
 };
 
