@@ -3,9 +3,10 @@ var Weapon = require("./weapon");
 var Player = require("./player");
 var WeaponFeature = require("./weapon-feature");
 var Armor = require("./armor");
+var State = require("./state");
 
-function Soldier(name, hp, attack, profession, weapon, armor) {
-  Player.call(this, name, hp, attack, profession);
+function Soldier(name, hp, attack, profession, state, weapon, armor) {
+  Player.call(this, name, hp, attack, profession, state);
   this.weapon = weapon;
   this.armor = armor;
   this.count = 0;
@@ -20,26 +21,27 @@ Soldier.prototype.criticalStrikes = function(player) {
 
   var attackHarm = (this.attack + this.weapon.attack)*3;
 
-  var soldier = "战士" + this.name;
   var resultText = "";
 
   if(one < odd) {
     player.hp = player.hp - attackHarm;
-    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + ',' +
-        soldier + "发动了" + this.weapon.feature.name + "," +
-        player.name + "受到了" + attackHarm + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
+    resultText += this.profession + this.name + '用' + this.weapon.name + "攻击了" +
+      player.profession + player.name + ',' +
+      this.profession + this.name + "发动了" + this.weapon.feature.name + "," +
+      player.name + "受到了" + attackHarm + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
 
   } else {
     player.hp = player.hp - this.attack;
-    resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + ',' +
-        player.name + "受到了" + this.attack + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
+    resultText += this.profession + this.name + '用' + this.weapon.name + "攻击了" +
+      player.profession + player.name + ',' + player.name + "受到了" +
+      this.attack + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
   }
 
   if(player.hp > 0) {
-    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
+    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.profession, this.state, this.weapon,this.armor);
 
 
-    var civilian = new Civilian(player.name, player.hp, player.attack);
+    var civilian = new Civilian(player.name, player.hp, player.attack, player.profession, player.state);
 
     resultText += civilian.civilianBeat(soldier1, this.armor);
   }
@@ -67,35 +69,16 @@ Soldier.prototype.fireStrikes = function(player) {
   } else {
     resultText += soldier + '用' + this.weapon.name + "攻击了普通人" + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp  + "\n";
-    this.count--
+    this.count--;
   }
 
   var fireHarm = this.weapon.attack;
 
   if(player.hp > 0) {
-    if(this.count < 2 && this.count >= 0) {
-      player.hp = player.hp - fireHarm;
-      resultText += player.name + "受到了" + fireHarm + "点火焰伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
-    }
-    if(this.count >= 2) {
-      fireHarm += this.weapon.attack;
-
-      player.hp = player.hp - fireHarm;
-      resultText += player.name + "受到了" + fireHarm + "点火焰伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
-      this.count--;
-    }
-  }
-
-  if(player.hp > 0) {
-    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.weapon,this.armor);
-
-    var civilian = new Civilian(player.name, player.hp, player.attack);
-
-    resultText += civilian.civilianBeat(soldier1, this.armor);
+    resultText += State.fireState(player, this.weapon, this.count);
   }
 
   console.log(resultText);
-
   return resultText;
 };
 
