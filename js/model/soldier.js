@@ -37,15 +37,6 @@ Soldier.prototype.criticalStrikes = function(player) {
       this.attack + "点伤害," + player.name + "生命值还剩：" + player.hp + "\n";
   }
 
-  if(player.hp > 0) {
-    var soldier1 = new Soldier(this.name,this.hp,this.attack,this.profession, this.state, this.weapon,this.armor);
-
-
-    var civilian = new Civilian(player.name, player.hp, player.attack, player.profession, player.state);
-
-    resultText += civilian.civilianBeat(soldier1, this.armor);
-  }
-
   console.log(resultText);
   return resultText;
 };
