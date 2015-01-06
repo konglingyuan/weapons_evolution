@@ -19,7 +19,9 @@ Pk.startPk = function (soldier,civilian) {
       resultText += civilian.name + "被打败了！！！";
       break;
     }
-    civilian.civilianBeat(soldier, soldier.armor);
+    if(civilian.state === 0) {
+      civilian.civilianBeat(soldier, soldier.armor);
+    }
   }
   console.log(resultText);
 };
