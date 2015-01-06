@@ -14,7 +14,6 @@ describe("Soldier", function() {
     var Civilian = require("../js/model/civilian");
     var WeaponFeature = require("../js/model/weapon-feature");
     var Armor = require("../js/model/armor");
-    var State = require("../js/model/state");
 
     it("should return the correct statement", function() {
       var feature = new WeaponFeature("火", 2, 1);
