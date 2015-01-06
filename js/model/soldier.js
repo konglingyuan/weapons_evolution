@@ -4,8 +4,8 @@ var Player = require("./player");
 var WeaponFeature = require("./weapon-feature");
 var Armor = require("./armor");
 
-function Soldier(name, hp, attack, weapon, armor) {
-  Player.call(this, name, hp, attack);
+function Soldier(name, hp, attack, profession, weapon, armor) {
+  Player.call(this, name, hp, attack, profession);
   this.weapon = weapon;
   this.armor = armor;
   this.count = 0;
