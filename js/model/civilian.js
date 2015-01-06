@@ -2,8 +2,8 @@ var Player = require("./player");
 var Soldier = require("./soldier");
 var Armor = require("./armor.js");
 
-function Civilian(name, hp, attack) {
-  Player.call(this, name, hp, attack);
+function Civilian(name, hp, attack, profession) {
+  Player.call(this, name, hp, attack, profession);
 }
 
 Civilian.prototype = Object.create(Player.prototype);
