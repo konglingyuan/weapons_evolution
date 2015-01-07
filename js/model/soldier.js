@@ -68,6 +68,9 @@ Soldier.prototype.fireStrikes = function(player) {
   if(player.hp > 0) {
     resultText += State.continueState(player, this.weapon, this.count);
   }
+  if(this.count >= 2) {
+    this.count--;
+  }
 
   console.log(resultText);
   return resultText;
