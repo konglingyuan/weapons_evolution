@@ -4,7 +4,6 @@ function State() {
 State.ontinueState = function(player, weapon, count) {
   var fireHarm = weapon.attack;
   var resultText = "";
-
   if(count < 2 && count >= 0) {
     player.hp = player.hp - fireHarm;
     resultText += player.profession + player.name +
