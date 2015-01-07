@@ -161,13 +161,7 @@ Soldier.prototype.iceStrikes = function(player) {
   }
 
   if(player.hp > 0) {
-    if(this.counts[0] === 3) {
-      resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
-      player.state = 1;
-      this.counts.shift();
-    } else{
-      player.state = 0;
-    }
+    resultText += State.iceState(player, this.counts, soldier);
   }
 
   console.log(resultText);
