@@ -15,7 +15,6 @@ State.continueState = function(player, weapon, count) {
     player.hp = player.hp - fireHarm;
     resultText += player.profession + player.name +
       "受到了" + fireHarm + "点" + weapon.feature.name + "伤害，" + player.name + "生命值还剩：" + player.hp;
-    count--;
   }
   return resultText;
 };
