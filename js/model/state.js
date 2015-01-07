@@ -30,4 +30,17 @@ State.dizzyState = function(player, count) {
   return resultText;
 };
 
+State.iceState = function(player, counts, soldier) {
+  var resultText = "";
+
+  if(counts[0] === 3) {
+    resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
+    player.state = 1;
+    counts.shift();
+  } else{
+    player.state = 0;
+  }
+  return resultText;
+}
+
 module.exports = State;
