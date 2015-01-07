@@ -1,7 +1,7 @@
 function State() {
 }
 
-State.ontinueState = function(player, weapon, count) {
+State.continueState = function(player, weapon, count) {
   var fireHarm = weapon.attack;
   var resultText = "";
   if(count < 2 && count >= 0) {
