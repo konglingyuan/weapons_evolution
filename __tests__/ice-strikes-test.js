@@ -4,6 +4,8 @@ jest.dontMock("../js/model/weapon.js");
 jest.dontMock("../js/model/player");
 jest.dontMock("../js/model/weapon-feature");
 jest.dontMock("../js/model/armor");
+jest.dontMock("lodash");
+jest.dontMock("../js/model/state");
 
 describe("Soldier", function() {
   describe(".iceStrikes", function() {
@@ -21,9 +23,11 @@ describe("Soldier", function() {
         var soldier = new Soldier("张三", 100, 10, "战士", 0, weapon, armor);
         var civilian = new Civilian("李四", 100, 5, "普通人", 0);
 
+        var State = jest.genMockFn();
+        State.mockReturnValue(civilian, 1, soldier.profession+soldier.name);
+
         var result = soldier.iceStrikes(civilian);
-        var str = "战士张三用紫光冰魄刀攻击了普通人李四，李四受到了10点伤害，李四冻僵了，生命值还剩：90" + "\n" +
-            "普通人李四攻击了战士张三,战士张三受到了2点伤害,战士张三生命值还剩98";
+        var str = "战士张三用紫光冰魄刀攻击了普通人李四，李四受到了10点伤害，李四冻僵了，生命值还剩：90" + "\n";
 
         expect(result).toBe(str);
     });
@@ -36,9 +40,7 @@ describe("Soldier", function() {
         var civilian = new Civilian("李四", 100, 5, "普通人", 0);
 
         var result = soldier.iceStrikes(civilian);
-        var str = "战士张三用紫光冰魄刀攻击了普通人李四，李四受到了10点伤害，李四生命值还剩：90" + "\n" +
-            "普通人李四攻击了战士张三,战士张三受到了2点伤害,战士张三生命值还剩98";
-
+        var str = "战士张三用紫光冰魄刀攻击了普通人李四，李四受到了10点伤害，李四生命值还剩：90" + "\n";
         expect(result).toBe(str);
     });
   });
