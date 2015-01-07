@@ -4,12 +4,14 @@ var Player = require("./player");
 var WeaponFeature = require("./weapon-feature");
 var Armor = require("./armor");
 var State = require("./state");
+var _ = require("lodash");
 
 function Soldier(name, hp, attack, profession, state, weapon, armor) {
   Player.call(this, name, hp, attack, profession, state);
   this.weapon = weapon;
   this.armor = armor;
   this.count = 0;
+  this.counts = [];
 }
 
 Soldier.prototype = Object.create(Player.prototype);
@@ -138,8 +140,8 @@ Soldier.prototype.dizzyStrikes = function(player) {
 Soldier.prototype.iceStrikes = function(player) {
   var one = Math.random();
   var odd = this.weapon.feature.odds;
-
   var resultText = "";
+  var _this = this;
 
   player.hp = player.hp - this.attack;
 
@@ -148,26 +150,27 @@ Soldier.prototype.iceStrikes = function(player) {
   if(one < odd) {
     resultText += soldier + '用' + this.weapon.name + "攻击了" + player.profession + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "冻僵了，生命值还剩：" + player.hp + "\n";
-
-    this.count =  this.count <= 0 ? this.weapon.feature.count - 1 : this.count + 1;
+    this.counts.push(0);
   } else {
     resultText += soldier + '用' + this.weapon.name + "攻击了" + player.profession + player.name + '，' +
     player.name + "受到了" + this.attack + "点伤害，" + player.name + "生命值还剩：" + player.hp + "\n";
   }
 
-  if(this.count === 3) {
-    resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
-  } else {
-    var soldier1 = new Soldier(this.name, this.hp, this.attack,
-      this.profession, this.state, this.weapon,this.armor);
+  if(this.counts.length > 0) {
+    this.counts = _.map(_this.counts, function(num) {return num + 1;});
+  }
 
-    var civilian = new Civilian(player.name, player.hp, player.attack, player.profession, player.state);
-
-    resultText += civilian.civilianBeat(soldier1, this.armor);
+  if(player.hp > 0) {
+    if(this.counts[0] === 3) {
+      resultText += player.name + "冻得直哆嗦，没有击中" + soldier;
+      player.state = 1;
+      this.counts.shift();
+    } else{
+      player.state = 0;
+    }
   }
 
   console.log(resultText);
-
   return resultText;
 };
 
