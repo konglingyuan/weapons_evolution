@@ -23,7 +23,8 @@ Soldier.prototype.criticalStrikes = function(player) {
 
   var resultText = "";
 
-  var soldier = this.profession + this.name;
+
+   var soldier = this.profession + this.name;
 
   if(one < odd) {
     player.hp = player.hp - attackHarm;
